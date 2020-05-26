@@ -1,5 +1,6 @@
 package br.com.g3.sistemadevagaseng.resource;
 
+import br.com.g3.sistemadevagaseng.domain.Professor;
 import br.com.g3.sistemadevagaseng.domain.Turma;
 import br.com.g3.sistemadevagaseng.dto.TurmaDTO;
 import br.com.g3.sistemadevagaseng.service.TurmaService;
@@ -32,6 +33,11 @@ public class TurmaController {
         List<Turma> lista = service.findAll();
         lista = lista.stream().sorted(Comparator.comparing(Turma::getId)).collect(Collectors.toList());
         return ResponseEntity.ok(lista);
+    }
+
+    @GetMapping("/{id}/professores")
+    public ResponseEntity<List<Professor>> getProfessor(@PathVariable Long id){
+        return ResponseEntity.ok(service.getProfessor(id));
     }
 
     @DeleteMapping("/{id}")

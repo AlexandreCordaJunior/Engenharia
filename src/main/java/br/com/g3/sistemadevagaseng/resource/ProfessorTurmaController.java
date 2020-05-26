@@ -1,6 +1,7 @@
 package br.com.g3.sistemadevagaseng.resource;
 
 import br.com.g3.sistemadevagaseng.domain.ProfessorTurma;
+import br.com.g3.sistemadevagaseng.dto.ProfessorTurmaDTO;
 import br.com.g3.sistemadevagaseng.service.ProfessorTurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,13 +39,17 @@ public class ProfessorTurmaController {
         return ResponseEntity.noContent().build();
     }
 
-    /*@PostMapping
+    @PostMapping
     public ResponseEntity<ProfessorTurma> save(@RequestBody ProfessorTurmaDTO objDTO){
         ProfessorTurma obj = service.fromDTO(objDTO);
         obj = service.save(obj);
+        if(obj == null){
+            return ResponseEntity.badRequest().build();
+        }
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(obj.getId()).toUri();
+                .path("/{idProfessor}/{idTurma}").buildAndExpand(obj.getProfessorTurmaId().getProfessor().getId(),
+                obj.getProfessorTurmaId().getTurma().getId()).toUri();
         return ResponseEntity.created(uri).build();
-    }*/
+    }
 
 }

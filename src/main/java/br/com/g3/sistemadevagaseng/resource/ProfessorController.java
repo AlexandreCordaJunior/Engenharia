@@ -1,6 +1,7 @@
 package br.com.g3.sistemadevagaseng.resource;
 
 import br.com.g3.sistemadevagaseng.domain.Professor;
+import br.com.g3.sistemadevagaseng.domain.Turma;
 import br.com.g3.sistemadevagaseng.dto.ProfessorDTO;
 import br.com.g3.sistemadevagaseng.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class ProfessorController {
         List<Professor> lista = service.findAll();
         lista = lista.stream().sorted(Comparator.comparing(Professor::getId)).collect(Collectors.toList());
         return ResponseEntity.ok(lista);
+    }
+
+    @GetMapping("/{id}/turmas")
+    public ResponseEntity<List<Turma>> getProfessor(@PathVariable Long id){
+        return ResponseEntity.ok(service.getTurmas(id));
     }
 
     @DeleteMapping("/{id}")

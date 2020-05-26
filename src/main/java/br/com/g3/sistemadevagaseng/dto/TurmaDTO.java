@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class TurmaDTO implements Serializable {
     private Long id;
-    private Long numTurma;
+    private String numTurma;
     private char periodo;
     private String tipo;
     private Integer quantidadeMaximaDeAlunos;
@@ -14,7 +14,7 @@ public class TurmaDTO implements Serializable {
     private Long responsavelPeloCadastroId;
     private Long escolaId;
 
-    public TurmaDTO(Long id, Long numTurma, char periodo, String tipo, Integer quantidadeMaximaDeAlunos, char estado, Long responsavelPeloCadastroId, Long escolaId) {
+    public TurmaDTO(Long id, String numTurma, char periodo, String tipo, Integer quantidadeMaximaDeAlunos, char estado, Long responsavelPeloCadastroId, Long escolaId) {
         this.id = id;
         this.numTurma = numTurma;
         this.periodo = periodo;
@@ -47,11 +47,11 @@ public class TurmaDTO implements Serializable {
         this.id = id;
     }
 
-    public Long getNumTurma() {
+    public String getNumTurma() {
         return numTurma;
     }
 
-    public void setNumTurma(Long numTurma) {
+    public void setNumTurma(String numTurma) {
         this.numTurma = numTurma;
     }
 

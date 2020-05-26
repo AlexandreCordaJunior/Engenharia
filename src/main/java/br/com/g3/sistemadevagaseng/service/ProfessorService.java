@@ -2,6 +2,7 @@ package br.com.g3.sistemadevagaseng.service;
 
 import br.com.g3.sistemadevagaseng.domain.Funcionario;
 import br.com.g3.sistemadevagaseng.domain.Professor;
+import br.com.g3.sistemadevagaseng.domain.Turma;
 import br.com.g3.sistemadevagaseng.dto.ProfessorDTO;
 import br.com.g3.sistemadevagaseng.repository.ProfessorRepository;
 import br.com.g3.sistemadevagaseng.service.exceptions.ObjectNotFoundException;
@@ -31,6 +32,10 @@ public class ProfessorService {
 
     public List<Professor> findAll(){
         return repo.findAll();
+    }
+
+    public List<Turma> getTurmas(Long id) {
+        return repo.findTurma(id);
     }
 
     public void delete(Long id){

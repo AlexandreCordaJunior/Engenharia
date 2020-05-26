@@ -1,51 +1,40 @@
 package br.com.g3.sistemadevagaseng.domain;
 
 import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
 public class ProfessorTurmaId implements Serializable {
 
-    private Long professorId;
+    @ManyToOne
+    private Professor professor;
 
-    private Long turmaId;
+    @ManyToOne
+    private Turma turma;
 
-    public ProfessorTurmaId(Long professorId, Long turmaId) {
-        this.professorId = professorId;
-        this.turmaId = turmaId;
+    public ProfessorTurmaId(Professor professor, Turma turma) {
+        this.professor = professor;
+        this.turma = turma;
     }
 
     public ProfessorTurmaId() {
     }
 
-    public Long getProfessorId() {
-        return professorId;
+    public Professor getProfessor() {
+        return professor;
     }
 
-    public void setProfessorId(Long professorId) {
-        this.professorId = professorId;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
-    public Long getTurmaId() {
-        return turmaId;
+    public Turma getTurma() {
+        return turma;
     }
 
-    public void setTurmaId(Long turmaId) {
-        this.turmaId = turmaId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProfessorTurmaId that = (ProfessorTurmaId) o;
-        return Objects.equals(professorId, that.professorId) &&
-                Objects.equals(turmaId, that.turmaId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(professorId, turmaId);
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 }

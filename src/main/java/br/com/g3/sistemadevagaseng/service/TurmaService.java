@@ -1,6 +1,7 @@
 package br.com.g3.sistemadevagaseng.service;
 
 import br.com.g3.sistemadevagaseng.domain.Escola;
+import br.com.g3.sistemadevagaseng.domain.Professor;
 import br.com.g3.sistemadevagaseng.domain.Turma;
 import br.com.g3.sistemadevagaseng.domain.Funcionario;
 import br.com.g3.sistemadevagaseng.dto.TurmaDTO;
@@ -35,6 +36,10 @@ public class TurmaService {
 
     public List<Turma> findAll(){
         return repo.findAll();
+    }
+
+    public List<Professor> getProfessor(Long id) {
+        return repo.findProfessor(id);
     }
 
     public void delete(Long id){

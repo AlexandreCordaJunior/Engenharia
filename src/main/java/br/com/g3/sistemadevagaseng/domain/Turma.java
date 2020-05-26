@@ -16,14 +16,13 @@ public class Turma implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long numTurma;
+    private String numTurma;
     private char periodo;
     private String tipo;
     private Integer quantidadeMaximaDeAlunos;
     private char estado;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "escola")
     private Escola escola;
 
@@ -43,7 +42,7 @@ public class Turma implements Serializable {
     public Turma() {
     }
 
-    public Turma(Long id, Long numTurma, char periodo, String tipo, Integer quantidadeMaximaDeAlunos, char estado, Escola escola, Funcionario responsaelPeloCadastro) {
+    public Turma(Long id, String numTurma, char periodo, String tipo, Integer quantidadeMaximaDeAlunos, char estado, Escola escola, Funcionario responsaelPeloCadastro) {
         this.id = id;
         this.numTurma = numTurma;
         this.periodo = periodo;
@@ -62,11 +61,11 @@ public class Turma implements Serializable {
         this.id = id;
     }
 
-    public Long getNumTurma() {
+    public String getNumTurma() {
         return numTurma;
     }
 
-    public void setNumTurma(Long numTurma) {
+    public void setNumTurma(String numTurma) {
         this.numTurma = numTurma;
     }
 

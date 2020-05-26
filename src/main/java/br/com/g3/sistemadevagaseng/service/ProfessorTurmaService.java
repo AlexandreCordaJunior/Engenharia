@@ -1,6 +1,7 @@
 package br.com.g3.sistemadevagaseng.service;
 
 import br.com.g3.sistemadevagaseng.domain.*;
+import br.com.g3.sistemadevagaseng.dto.ProfessorTurmaDTO;
 import br.com.g3.sistemadevagaseng.repository.ProfessorTurmaRepository;
 import br.com.g3.sistemadevagaseng.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,6 @@ import java.util.Optional;
 public class ProfessorTurmaService {
     @Autowired
     private ProfessorTurmaRepository repo;
-
-    @Autowired
-    private FuncionarioService funcionarioService;
 
     @Autowired
     private ProfessorService professorService;
@@ -40,7 +38,13 @@ public class ProfessorTurmaService {
     }
 
     public ProfessorTurma save(ProfessorTurma obj){
-        return repo.save(obj);
+        try{
+            find(obj.getProfessorTurmaId().getProfessor().getId(), obj.getProfessorTurmaId().getTurma().getId());
+            return null;
+        }
+        catch (ObjectNotFoundException e){
+            return repo.save(obj);
+        }
     }
 
     public void delete(Long professorId, Long turmaId){
@@ -60,5 +64,11 @@ public class ProfessorTurmaService {
                                     String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
+    }
+
+    public ProfessorTurma fromDTO(ProfessorTurmaDTO objDTO){
+        Professor professor = professorService.find(objDTO.getProfessor_id());
+        Turma turma = turmaService.find(objDTO.getTurma_id());
+        return new ProfessorTurma(professor, turma);
     }
 }
