@@ -17,8 +17,9 @@ public class FuncionarioDTO implements Serializable {
     private String nome;
     private char estado;
     private Long responsavelPeloCadastroId;
+    private String senha;
 
-    public FuncionarioDTO(Long id, String cpf, String rg, Date dataDeNascimento, char sexo, String email, String telefone, String endereco, String nome, char estado, Long responsavelPeloCadastroId) {
+    public FuncionarioDTO(Long id, String cpf, String rg, Date dataDeNascimento, char sexo, String email, String telefone, String endereco, String nome, char estado, Long responsavelPeloCadastroId, String senha) {
         this.id = id;
         this.cpf = cpf;
         this.rg = rg;
@@ -30,6 +31,7 @@ public class FuncionarioDTO implements Serializable {
         this.nome = nome;
         this.estado = estado;
         this.responsavelPeloCadastroId = responsavelPeloCadastroId;
+        this.senha = senha;
     }
 
     public FuncionarioDTO() {
@@ -47,6 +49,7 @@ public class FuncionarioDTO implements Serializable {
         this.nome = funcionario.getNome();
         this.estado = funcionario.getEstado();
         this.responsavelPeloCadastroId = funcionario.getResponsavelPeloCadastro() == null ? null : funcionario.getResponsavelPeloCadastro().getId();
+        this.senha = funcionario.getSenha();
     }
 
     public Long getId() {
@@ -135,5 +138,13 @@ public class FuncionarioDTO implements Serializable {
 
     public void setResponsavelPeloCadastroId(Long responsavelPeloCadastroId) {
         this.responsavelPeloCadastroId = responsavelPeloCadastroId;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

@@ -38,6 +38,10 @@ public class ProfessorService {
         return repo.findTurma(id);
     }
 
+    public List<Professor> findAllThatDontBelong(Long id) {
+        return repo.getALlThatDontBelogToTurma(id);
+    }
+
     public void delete(Long id){
         Professor obj = find(id);
         obj.setEstado('I');

@@ -35,6 +35,13 @@ public class ProfessorController {
         return ResponseEntity.ok(lista);
     }
 
+    @GetMapping("/not_turma/{id}")
+    public ResponseEntity<List<Professor>> findAllNotTurma(@PathVariable Long id) {
+        List<Professor> lista = service.findAllThatDontBelong(id);
+        lista = lista.stream().sorted(Comparator.comparing(Professor::getId)).collect(Collectors.toList());
+        return ResponseEntity.ok(lista);
+    }
+
     @GetMapping("/{id}/turmas")
     public ResponseEntity<List<Turma>> getProfessor(@PathVariable Long id){
         return ResponseEntity.ok(service.getTurmas(id));

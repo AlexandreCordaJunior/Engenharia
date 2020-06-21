@@ -20,8 +20,7 @@ public class Solicitacao implements Serializable {
     private String enderecoDoResponsavel;
     private String telefoneDoResponsavel;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "turma")
     private Turma turma;
 

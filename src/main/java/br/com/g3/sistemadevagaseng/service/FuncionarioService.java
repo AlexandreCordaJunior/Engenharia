@@ -73,7 +73,8 @@ public class FuncionarioService {
                 funcionarioDTO.getEndereco(),
                 funcionarioDTO.getNome(),
                 funcionarioDTO.getEstado(),
-                responsavel
+                responsavel,
+                funcionarioDTO.getSenha()
         );
     }
 

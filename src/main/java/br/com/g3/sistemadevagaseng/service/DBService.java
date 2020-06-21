@@ -3,6 +3,7 @@ package br.com.g3.sistemadevagaseng.service;
 import br.com.g3.sistemadevagaseng.domain.*;
 import br.com.g3.sistemadevagaseng.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -32,14 +33,17 @@ public class DBService {
     @Autowired
     private TurmaRepository turmaRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public void iniciarDatabase(){
         Funcionario funcionario1 = new Funcionario(null, "47618982830",
             "507992738", Calendar.getInstance().getTime(), 'M', "ale.corda01@gmail.com",
-            "97979797", "Rua 1*Ita", "Alexandre", 'A', null);
+            "97979797", "Rua 1*Ita", "Alexandre", 'A', null, passwordEncoder.encode("senha"));
 
         Funcionario funcionario2 = new Funcionario(null, "4761898283",
             "50799738", Calendar.getInstance().getTime(), 'F', "alase.corda01@gmail.com",
-            "97979797", "Rua 1*Ita", "Alexa", 'I', funcionario1);
+            "97979797", "Rua 1*Ita", "Alexa", 'I', funcionario1, passwordEncoder.encode("senha"));
 
         funcionarioRepository.saveAll(Arrays.asList(funcionario1, funcionario2));
         /*--------------------------------------------------------------------*/

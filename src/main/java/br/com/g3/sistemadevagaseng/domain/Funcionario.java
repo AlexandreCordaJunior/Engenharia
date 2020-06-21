@@ -12,6 +12,7 @@ public class Funcionario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cpf;
+    private String senha;
     private String rg;
     private Date dataDeNascimento;
     private char sexo;
@@ -26,7 +27,7 @@ public class Funcionario implements Serializable {
     @JoinColumn(name = "responsavelPeloCadastro")
     private Funcionario responsavelPeloCadastro;
 
-    public Funcionario(Long id, String cpf, String rg, Date dataDeNascimento, char sexo, String email, String telefone, String endereco, String nome, char estado, Funcionario responsavelPeloCadastro) {
+    public Funcionario(Long id, String cpf, String rg, Date dataDeNascimento, char sexo, String email, String telefone, String endereco, String nome, char estado, Funcionario responsavelPeloCadastro, String senha) {
         this.id = id;
         this.cpf = cpf;
         this.rg = rg;
@@ -38,6 +39,7 @@ public class Funcionario implements Serializable {
         this.nome = nome;
         this.estado = estado;
         this.responsavelPeloCadastro = responsavelPeloCadastro;
+        this.senha = senha;
     }
 
     public Funcionario() {
@@ -129,5 +131,13 @@ public class Funcionario implements Serializable {
 
     public void setResponsavelPeloCadastro(Funcionario responsavelPeloCadastro) {
         this.responsavelPeloCadastro = responsavelPeloCadastro;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
