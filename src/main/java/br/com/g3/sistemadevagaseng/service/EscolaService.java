@@ -1,14 +1,11 @@
 package br.com.g3.sistemadevagaseng.service;
 
-import br.com.g3.sistemadevagaseng.domain.Funcionario;
 import br.com.g3.sistemadevagaseng.domain.Escola;
+import br.com.g3.sistemadevagaseng.domain.Funcionario;
 import br.com.g3.sistemadevagaseng.dto.EscolaDTO;
 import br.com.g3.sistemadevagaseng.repository.EscolaRepository;
 import br.com.g3.sistemadevagaseng.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,11 +70,5 @@ public class EscolaService {
                 objDTO.getEstado(),
                 responsavel
         );
-    }
-
-    public Page<Escola> findPage(Integer page, Integer linesPerPage, String orderBy,
-                                    String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repo.findAll(pageRequest);
     }
 }

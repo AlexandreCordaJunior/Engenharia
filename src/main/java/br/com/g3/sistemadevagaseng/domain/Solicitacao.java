@@ -24,7 +24,6 @@ public class Solicitacao implements Serializable {
     @JoinColumn(name = "turma")
     private Turma turma;
 
-    private char periodo;
     private char estado;
     private Date dataDeInscricao;
     private String email;
@@ -34,10 +33,13 @@ public class Solicitacao implements Serializable {
     @JoinColumn(name = "responsavelPeloCadastro")
     private Funcionario responsavelPeloCadastro;
 
+    @OneToOne(mappedBy = "solicitacao")
+    private Matricula matricula;
+
     public Solicitacao() {
     }
 
-    public Solicitacao(Long id, String nomeDoAluno, Date dataDeNascimentoDoAluno, char sexoDoAluno, String cpfDoResponsavel, String nomeDoResponsavel, String enderecoDoResponsavel, String telefoneDoResponsavel, Turma turma, char periodo, char estado, Date dataDeInscricao, String email, Funcionario responsavelPeloCadastro) {
+    public Solicitacao(Long id, String nomeDoAluno, Date dataDeNascimentoDoAluno, char sexoDoAluno, String cpfDoResponsavel, String nomeDoResponsavel, String enderecoDoResponsavel, String telefoneDoResponsavel, Turma turma, char estado, Date dataDeInscricao, String email, Funcionario responsavelPeloCadastro) {
         this.id = id;
         this.nomeDoAluno = nomeDoAluno;
         this.dataDeNascimentoDoAluno = dataDeNascimentoDoAluno;
@@ -47,7 +49,6 @@ public class Solicitacao implements Serializable {
         this.enderecoDoResponsavel = enderecoDoResponsavel;
         this.telefoneDoResponsavel = telefoneDoResponsavel;
         this.turma = turma;
-        this.periodo = periodo;
         this.estado = estado;
         this.dataDeInscricao = dataDeInscricao;
         this.email = email;
@@ -118,14 +119,6 @@ public class Solicitacao implements Serializable {
         this.turma = turma;
     }
 
-    public char getPeriodo() {
-        return periodo;
-    }
-
-    public void setPeriodo(char periodo) {
-        this.periodo = periodo;
-    }
-
     public char getEstado() {
         return estado;
     }
@@ -164,5 +157,13 @@ public class Solicitacao implements Serializable {
 
     public void setNomeDoResponsavel(String nomeDoResponsavel) {
         this.nomeDoResponsavel = nomeDoResponsavel;
+    }
+
+    public Matricula getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(Matricula matricula) {
+        this.matricula = matricula;
     }
 }

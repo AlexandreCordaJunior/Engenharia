@@ -5,9 +5,6 @@ import br.com.g3.sistemadevagaseng.dto.FuncionarioDTO;
 import br.com.g3.sistemadevagaseng.repository.FuncionarioRepository;
 import br.com.g3.sistemadevagaseng.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +20,14 @@ public class FuncionarioService {
         return opt.orElseThrow(() -> {
             return new ObjectNotFoundException("Id não encontrado - " + Funcionario.class.getName());
         });
+    }
+
+    public Funcionario findByEmail(String email){
+        Funcionario fun = repo.findByEmail(email);
+        if(fun == null) {
+            throw new ObjectNotFoundException("Email não encontrado - " + Funcionario.class.getName());
+        }
+        return fun;
     }
 
     public List<Funcionario> findAll(){
@@ -76,11 +81,5 @@ public class FuncionarioService {
                 responsavel,
                 funcionarioDTO.getSenha()
         );
-    }
-
-    public Page<Funcionario> findPage(Integer page, Integer linesPerPage, String orderBy,
-                                    String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repo.findAll(pageRequest);
     }
 }

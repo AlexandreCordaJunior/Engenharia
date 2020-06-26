@@ -4,15 +4,14 @@ import br.com.g3.sistemadevagaseng.domain.Funcionario;
 import br.com.g3.sistemadevagaseng.dto.FuncionarioDTO;
 import br.com.g3.sistemadevagaseng.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,6 +20,9 @@ public class FuncionarioController {
 
     @Autowired
     private FuncionarioService service;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
     public ResponseEntity<Funcionario> find(@PathVariable Long id){
@@ -49,20 +51,10 @@ public class FuncionarioController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<FuncionarioDTO>> findPage(
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-            @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
-            @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-        Page<Funcionario> obj = service.findPage(page, linesPerPage, orderBy, direction);
-        Page<FuncionarioDTO> listDTO = obj.map(o -> new FuncionarioDTO(o));
-        return ResponseEntity.ok().body(listDTO);
-    }
-
     @PostMapping
     public ResponseEntity<Funcionario> save(@RequestBody FuncionarioDTO objDTO){
         Funcionario obj = service.fromDTO(objDTO);
+        obj.setSenha(passwordEncoder.encode(obj.getSenha()));
         obj = service.save(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();

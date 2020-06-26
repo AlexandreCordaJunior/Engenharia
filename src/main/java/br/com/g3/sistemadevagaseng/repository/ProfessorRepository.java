@@ -15,5 +15,8 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
     public List<Turma> findTurma(@Param("id") Long id);
 
     @Query("select professor from Professor professor inner join ProfessorTurma pt on pt.professorTurmaId.professor = professor where :id <> pt.professorTurmaId.turma.id")
-    public List<Professor> getALlThatDontBelogToTurma(@Param("id") Long id);
+    public List<Professor> getAllThatDontBelogToTurma(@Param("id") Long id);
+
+    @Query("select professor from Professor professor where professor.estado = 'A'")
+    public List<Professor> ativos();
 }

@@ -7,9 +7,6 @@ import br.com.g3.sistemadevagaseng.dto.ProfessorDTO;
 import br.com.g3.sistemadevagaseng.repository.ProfessorRepository;
 import br.com.g3.sistemadevagaseng.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +28,7 @@ public class ProfessorService {
     }
 
     public List<Professor> findAll(){
-        return repo.findAll();
+        return repo.ativos();
     }
 
     public List<Turma> getTurmas(Long id) {
@@ -39,7 +36,7 @@ public class ProfessorService {
     }
 
     public List<Professor> findAllThatDontBelong(Long id) {
-        return repo.getALlThatDontBelogToTurma(id);
+        return repo.getAllThatDontBelogToTurma(id);
     }
 
     public void delete(Long id){
@@ -88,11 +85,5 @@ public class ProfessorService {
                 objDTO.getEstado(),
                 responsavel
         );
-    }
-
-    public Page<Professor> findPage(Integer page, Integer linesPerPage, String orderBy,
-                                    String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repo.findAll(pageRequest);
     }
 }

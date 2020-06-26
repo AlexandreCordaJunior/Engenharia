@@ -1,15 +1,12 @@
 package br.com.g3.sistemadevagaseng.service;
 
-import br.com.g3.sistemadevagaseng.domain.Solicitacao;
 import br.com.g3.sistemadevagaseng.domain.Funcionario;
+import br.com.g3.sistemadevagaseng.domain.Solicitacao;
 import br.com.g3.sistemadevagaseng.domain.Turma;
 import br.com.g3.sistemadevagaseng.dto.SolicitacaoDTO;
 import br.com.g3.sistemadevagaseng.repository.SolicitacaoRepository;
 import br.com.g3.sistemadevagaseng.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,7 +55,6 @@ public class SolicitacaoService {
         novoObj.setNomeDoResponsavel(obj.getNomeDoResponsavel());
         novoObj.setEnderecoDoResponsavel(obj.getEnderecoDoResponsavel());
         novoObj.setTurma(obj.getTurma());
-        novoObj.setPeriodo(obj.getPeriodo());
         novoObj.setEstado(obj.getEstado());
         novoObj.setDataDeInscricao(obj.getDataDeInscricao());
         novoObj.setEmail(obj.getEmail());
@@ -85,17 +81,10 @@ public class SolicitacaoService {
                 objDTO.getEnderecoDoResponsavel(),
                 objDTO.getTelefoneDoResponsavel(),
                 turma,
-                objDTO.getPeriodo(),
                 objDTO.getEstado(),
                 objDTO.getDataDeInscricao(),
                 objDTO.getEmail(),
                 responsavel
         );
-    }
-
-    public Page<Solicitacao> findPage(Integer page, Integer linesPerPage, String orderBy,
-                                    String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repo.findAll(pageRequest);
     }
 }

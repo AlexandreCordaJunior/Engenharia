@@ -4,6 +4,7 @@ import br.com.g3.sistemadevagaseng.dto.JwtRequest;
 import br.com.g3.sistemadevagaseng.dto.JwtResponse;
 import br.com.g3.sistemadevagaseng.security.JwtTokenUtil;
 import br.com.g3.sistemadevagaseng.security.JwtUserDetailsService;
+import br.com.g3.sistemadevagaseng.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,13 +27,16 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
+    @Autowired
+    private FuncionarioService funcionarioService;
+
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token, userDetails.getUsername()));
+        return ResponseEntity.ok(new JwtResponse(token, funcionarioService.findByEmail(userDetails.getUsername()).getId().toString()));
     }
 
     private void authenticate(String username, String password) throws Exception {

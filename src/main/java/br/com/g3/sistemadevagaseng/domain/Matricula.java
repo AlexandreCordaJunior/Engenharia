@@ -13,7 +13,7 @@ public class Matricula implements Serializable {
     private Long id;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "solicitacao")
     private Solicitacao solicitacao;
 

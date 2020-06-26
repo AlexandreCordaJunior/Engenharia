@@ -4,15 +4,12 @@ import br.com.g3.sistemadevagaseng.domain.ProfessorTurma;
 import br.com.g3.sistemadevagaseng.dto.ProfessorTurmaDTO;
 import br.com.g3.sistemadevagaseng.service.ProfessorTurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/professor_turma")

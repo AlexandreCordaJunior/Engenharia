@@ -4,7 +4,6 @@ import br.com.g3.sistemadevagaseng.domain.Solicitacao;
 import br.com.g3.sistemadevagaseng.dto.SolicitacaoDTO;
 import br.com.g3.sistemadevagaseng.service.SolicitacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -46,17 +45,6 @@ public class SolicitacaoController {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<SolicitacaoDTO>> findPage(
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-            @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
-            @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-        Page<Solicitacao> obj = service.findPage(page, linesPerPage, orderBy, direction);
-        Page<SolicitacaoDTO> listDTO = obj.map(o -> new SolicitacaoDTO(o));
-        return ResponseEntity.ok().body(listDTO);
     }
 
     @PostMapping

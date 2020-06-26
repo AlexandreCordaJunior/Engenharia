@@ -7,9 +7,6 @@ import br.com.g3.sistemadevagaseng.dto.MatriculaDTO;
 import br.com.g3.sistemadevagaseng.repository.MatriculaRepository;
 import br.com.g3.sistemadevagaseng.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,9 +64,16 @@ public class MatriculaService {
         );
     }
 
-    public Page<Matricula> findPage(Integer page, Integer linesPerPage, String orderBy,
-                                    String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repo.findAll(pageRequest);
+    public List<Solicitacao> getAllBelong(Long id) {
+        return repo.getAll(id);
+    }
+
+    public List<Solicitacao> semTurma(Long id) {
+        return repo.semTurma(id);
+    }
+
+    public void delete(Long id) {
+        Matricula m = find(id);
+        repo.delete(m);
     }
 }

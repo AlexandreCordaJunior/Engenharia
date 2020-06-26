@@ -16,6 +16,7 @@ public class Funcionario implements Serializable {
     private String rg;
     private Date dataDeNascimento;
     private char sexo;
+    @Column(unique = true)
     private String email;
     private String telefone;
     private String endereco;

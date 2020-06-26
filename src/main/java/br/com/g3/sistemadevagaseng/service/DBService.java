@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 
 @Service
 public class DBService {
@@ -80,11 +79,11 @@ public class DBService {
         /*--------------------------------------------------------------------*/
 
         Solicitacao solicitacao1 = new Solicitacao(null, "Alfredo", Calendar.getInstance().getTime(),
-            'M', "654654654654", "Adolfo", "Rua 15*Ipo", "97643164", turma1,
-            'T', 'A', Calendar.getInstance().getTime(), "alfredo@a.com", funcionario1);
+            'M', "654654654654", "Adolfo", "Rua 15*Ipo", "97643164", turma1
+            , 'A', Calendar.getInstance().getTime(), "alfredo@a.com", funcionario1);
         Solicitacao solicitacao2 = new Solicitacao(null, "Alfreda", Calendar.getInstance().getTime(),
-                'F', "6546546154654", "Adolfa", "Rua 15*Ipoa", "976431644", turma1,
-                'T', 'A', Calendar.getInstance().getTime(), "alfreda@a.com", funcionario1);
+                'F', "6546546154654", "Adolfa", "Rua 15*Ipoa", "976431644", turma1
+                , 'A', Calendar.getInstance().getTime(), "alfreda@a.com", funcionario1);
 
         solicitacaoRepository.saveAll(Arrays.asList(solicitacao1, solicitacao2));
         /*--------------------------------------------------------------------*/

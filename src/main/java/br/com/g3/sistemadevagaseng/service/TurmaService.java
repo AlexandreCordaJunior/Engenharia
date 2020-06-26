@@ -1,16 +1,13 @@
 package br.com.g3.sistemadevagaseng.service;
 
 import br.com.g3.sistemadevagaseng.domain.Escola;
+import br.com.g3.sistemadevagaseng.domain.Funcionario;
 import br.com.g3.sistemadevagaseng.domain.Professor;
 import br.com.g3.sistemadevagaseng.domain.Turma;
-import br.com.g3.sistemadevagaseng.domain.Funcionario;
 import br.com.g3.sistemadevagaseng.dto.TurmaDTO;
 import br.com.g3.sistemadevagaseng.repository.TurmaRepository;
 import br.com.g3.sistemadevagaseng.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -85,11 +82,5 @@ public class TurmaService {
                 escola,
                 responsavel
         );
-    }
-
-    public Page<Turma> findPage(Integer page, Integer linesPerPage, String orderBy,
-                                    String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repo.findAll(pageRequest);
     }
 }

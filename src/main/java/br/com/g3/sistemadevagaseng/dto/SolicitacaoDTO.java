@@ -14,14 +14,13 @@ public class SolicitacaoDTO implements Serializable {
     private String nomeDoResponsavel;
     private String enderecoDoResponsavel;
     private String telefoneDoResponsavel;
-    private char periodo;
     private char estado;
     private Date dataDeInscricao;
     private String email;
     private Long turmaId;
     private Long responsavelPeloCadastroId;
 
-    public SolicitacaoDTO(Long id, String nomeDoAluno, Date dataDeNascimentoDoAluno, char sexoDoAluno, String cpfDoResponsavel, String nomeDoResponsavel, String enderecoDoResponsavel, String telefoneDoResponsavel, char periodo, char estado, Date dataDeInscricao, String email, Long turmaId, Long responsavelPeloCadastroId) {
+    public SolicitacaoDTO(Long id, String nomeDoAluno, Date dataDeNascimentoDoAluno, char sexoDoAluno, String cpfDoResponsavel, String nomeDoResponsavel, String enderecoDoResponsavel, String telefoneDoResponsavel, char estado, Date dataDeInscricao, String email, Long turmaId, Long responsavelPeloCadastroId) {
         this.id = id;
         this.nomeDoAluno = nomeDoAluno;
         this.dataDeNascimentoDoAluno = dataDeNascimentoDoAluno;
@@ -30,7 +29,6 @@ public class SolicitacaoDTO implements Serializable {
         this.nomeDoResponsavel = nomeDoResponsavel;
         this.enderecoDoResponsavel = enderecoDoResponsavel;
         this.telefoneDoResponsavel = telefoneDoResponsavel;
-        this.periodo = periodo;
         this.estado = estado;
         this.dataDeInscricao = dataDeInscricao;
         this.email = email;
@@ -50,7 +48,6 @@ public class SolicitacaoDTO implements Serializable {
         this.nomeDoResponsavel = solicitacao.getNomeDoResponsavel();
         this.enderecoDoResponsavel = solicitacao.getEnderecoDoResponsavel();
         this.telefoneDoResponsavel = solicitacao.getEnderecoDoResponsavel();
-        this.periodo = solicitacao.getPeriodo();
         this.estado = solicitacao.getEstado();
         this.dataDeInscricao = solicitacao.getDataDeInscricao();
         this.email = solicitacao.getEmail();
@@ -120,14 +117,6 @@ public class SolicitacaoDTO implements Serializable {
 
     public void setTelefoneDoResponsavel(String telefoneDoResponsavel) {
         this.telefoneDoResponsavel = telefoneDoResponsavel;
-    }
-
-    public char getPeriodo() {
-        return periodo;
-    }
-
-    public void setPeriodo(char periodo) {
-        this.periodo = periodo;
     }
 
     public char getEstado() {

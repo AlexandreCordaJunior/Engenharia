@@ -1,14 +1,13 @@
 package br.com.g3.sistemadevagaseng.service;
 
-import br.com.g3.sistemadevagaseng.domain.*;
+import br.com.g3.sistemadevagaseng.domain.Professor;
+import br.com.g3.sistemadevagaseng.domain.ProfessorTurma;
+import br.com.g3.sistemadevagaseng.domain.Turma;
 import br.com.g3.sistemadevagaseng.dto.ProfessorTurmaDTO;
 import br.com.g3.sistemadevagaseng.repository.ProfessorTurmaRepository;
 import br.com.g3.sistemadevagaseng.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,12 +57,6 @@ public class ProfessorTurmaService {
             throw new RuntimeException("Não é possivel excluir");
         }
 
-    }
-
-    public Page<ProfessorTurma> findPage(Integer page, Integer linesPerPage, String orderBy,
-                                    String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repo.findAll(pageRequest);
     }
 
     public ProfessorTurma fromDTO(ProfessorTurmaDTO objDTO){

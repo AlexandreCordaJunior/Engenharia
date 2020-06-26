@@ -1,10 +1,10 @@
 package br.com.g3.sistemadevagaseng.resource;
 
 import br.com.g3.sistemadevagaseng.domain.Matricula;
+import br.com.g3.sistemadevagaseng.domain.Solicitacao;
 import br.com.g3.sistemadevagaseng.dto.MatriculaDTO;
 import br.com.g3.sistemadevagaseng.service.MatriculaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -42,17 +42,6 @@ public class MatriculaController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<MatriculaDTO>> findPage(
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-            @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
-            @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-        Page<Matricula> obj = service.findPage(page, linesPerPage, orderBy, direction);
-        Page<MatriculaDTO> listDTO = obj.map(o -> new MatriculaDTO(o));
-        return ResponseEntity.ok().body(listDTO);
-    }
-
     @PostMapping
     public ResponseEntity<Matricula> save(@RequestBody MatriculaDTO objDTO){
         Matricula obj = service.fromDTO(objDTO);
@@ -62,4 +51,19 @@ public class MatriculaController {
         return ResponseEntity.created(uri).build();
     }
 
+    @GetMapping("/turma/{id}")
+    public ResponseEntity<List<Solicitacao>> emTurma(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getAllBelong(id));
+    }
+
+    @GetMapping("/semturma/{id}")
+    public ResponseEntity<List<Solicitacao>> semTurma(@PathVariable Long id) {
+        return ResponseEntity.ok(service.semTurma(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

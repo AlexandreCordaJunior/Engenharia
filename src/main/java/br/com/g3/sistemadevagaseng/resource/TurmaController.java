@@ -5,7 +5,6 @@ import br.com.g3.sistemadevagaseng.domain.Turma;
 import br.com.g3.sistemadevagaseng.dto.TurmaDTO;
 import br.com.g3.sistemadevagaseng.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -52,17 +51,6 @@ public class TurmaController {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<TurmaDTO>> findPage(
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-            @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
-            @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-        Page<Turma> obj = service.findPage(page, linesPerPage, orderBy, direction);
-        Page<TurmaDTO> listDTO = obj.map(o -> new TurmaDTO(o));
-        return ResponseEntity.ok().body(listDTO);
     }
 
     @PostMapping

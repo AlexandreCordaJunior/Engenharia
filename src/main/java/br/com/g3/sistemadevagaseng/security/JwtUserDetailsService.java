@@ -18,8 +18,8 @@ public class JwtUserDetailsService implements UserDetailsService {
     private FuncionarioService funcionarioService;
 
     @Override
-    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        Funcionario funcionario = funcionarioService.find(Long.parseLong(id));
-        return new User(id, funcionario.getSenha(), new ArrayList<>());
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Funcionario funcionario = funcionarioService.findByEmail(email);
+        return new User(email, funcionario.getSenha(), new ArrayList<>());
     }
 }
